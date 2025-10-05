@@ -5,6 +5,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import BookDetails from "../Pages/BookDetails/BookDetails";
 import About from "../Pages/About/About";
 import { createBrowserRouter } from "react-router";
+import ListedBooks from "../Pages/ListedBooks/ListedBooks";
 
 export const router = createBrowserRouter([
   {
@@ -34,11 +35,16 @@ export const router = createBrowserRouter([
           return singleBook || null;
         },
         Component: BookDetails,
-        hydrateFallbackElement: <h1>loading</h1>,
+        // hydrateFallbackElement: <h1>loading</h1>,
+      },
+      {
+        path: "listedBooks",
+        loader: () => fetch("/booksData.json"),
+        Component: ListedBooks,
       },
       {
         path: "about",
-        loader: () => fetch("booksData.json"),
+        loader: () => fetch("/booksData.json"),
         Component: About,
       },
     ],

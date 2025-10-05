@@ -1,6 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router";
 import Container from "./../../Components/Container/Container";
+import { AddBookToDb } from "../../utilities/AddToDb";
 
 const BookDetails = () => {
   const singleBook = useLoaderData();
@@ -8,7 +9,7 @@ const BookDetails = () => {
 
   const {
     author,
-    // bookId,
+    bookId,
     totalPages,
     yearOfPublishing,
     bookName,
@@ -24,6 +25,9 @@ const BookDetails = () => {
     return <h1>Book not found</h1>;
   }
 
+  const handleMarkAsRead = (id) => {
+    AddBookToDb(id);
+  };
   return (
     <Container>
       <div className="flex flex-col lg:flex-row gap-6 justify-between my-14">
@@ -52,7 +56,7 @@ const BookDetails = () => {
           </p>{" "}
           <div className="flex items-center gap-2 mt-4 lg:mt-6">
             <p>Tags</p>
-            <p>
+            <div>
               {tags.map((tag, index) => (
                 <div
                   key={index}
@@ -61,7 +65,7 @@ const BookDetails = () => {
                   {tag}
                 </div>
               ))}
-            </p>
+            </div>
           </div>
           <div className=" lg:py-4 py-2">
             <hr className=" text-[#13131326] " />
@@ -86,10 +90,15 @@ const BookDetails = () => {
             </div>
           </div>
           <div className="mt-8 space-x-4">
-            <button className="btn border border-[#1313134D] bg-white ">
-              Read
+            <button
+              onClick={() => handleMarkAsRead(bookId)}
+              className="btn border border-[#1313134D] bg-white "
+            >
+              Mark as Read
             </button>
-            <button className="btn bg-[#50B1C9] text-white ">WishList</button>
+            <button className="btn bg-[#50B1C9] text-white ">
+              Add to Wish List
+            </button>
           </div>
         </div>
       </div>

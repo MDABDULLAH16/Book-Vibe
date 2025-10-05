@@ -3,12 +3,15 @@ import { NavLink } from "react-router";
 
 const Navbar = () => {
   const links = (
-    <div className="flex gap-4 items-center">
+    <div className="flex gap-4 flex-col lg:flex-row items-center">
       <NavLink to="/" className="">
         Home
       </NavLink>
       <NavLink to="/books" className="">
         Books
+      </NavLink>
+      <NavLink to="/listedBooks" className="">
+        Listed Books
       </NavLink>
       {/* <NavLink
         to="/"
@@ -24,6 +27,12 @@ const Navbar = () => {
         About Us
       </NavLink>
     </div>
+  );
+  const buttons = (
+    <>
+      <a className="btn bg-[#23BE0A] text-white my-2">Sign In</a>
+      <a className="btn bg-[#59C6D2] text-white ">Sign Up</a>
+    </>
   );
   return (
     <div className="bg-base-100 shadow-sm">
@@ -57,6 +66,7 @@ const Navbar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
               >
                 {links}
+                {buttons}
               </ul>
             </div>
             <a className="btn btn-ghost text-xl">Book Vibe</a>
@@ -64,10 +74,7 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
-          <div className="navbar-end gap-2 ">
-            <a className="btn bg-[#23BE0A] text-white">Sign In</a>
-            <a className="btn bg-[#59C6D2] text-white">Sign Up</a>
-          </div>
+          <div className="navbar-end gap-2 hidden lg:flex ">{buttons}</div>
         </div>
       </Container>
     </div>
