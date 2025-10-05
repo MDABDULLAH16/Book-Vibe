@@ -9,7 +9,7 @@ const BookCard = ({ book }) => {
   const { author, bookId, bookName, category, image, tags, rating } = book;
 
   return (
-    <Link to={`/bookDetails/:${bookId}`}>
+    <Link to={`/books/${bookId}`}>
       <div className="card bg-base-100 w-full shadow-sm p-6">
         <figure className="bg-[#F3F3F3] rounded-2xl">
           <img className="h-[166px] py-6" src={image} alt="Book image" />
@@ -18,8 +18,11 @@ const BookCard = ({ book }) => {
         <div className="">
           {" "}
           <div className="card-actions">
-            {tags.map((tag) => (
-              <div className="badge badge-outline badge-primary text-[#23BE0A] font-work mt-4 lg:mt-6 ">
+            {tags.map((tag, index) => (
+              <div
+                key={index}
+                className="badge badge-outline badge-primary text-[#23BE0A] font-work mt-4 lg:mt-6 "
+              >
                 {tag}
               </div>
             ))}
