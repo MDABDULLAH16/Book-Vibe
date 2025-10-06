@@ -18,7 +18,7 @@ const ListedBooks = () => {
       getStoredBook.includes(book.bookId)
     );
     setReadListBook(filterBookData);
-  }, [bookData, readListBook]);
+  }, []);
 
   return (
     <Container>
