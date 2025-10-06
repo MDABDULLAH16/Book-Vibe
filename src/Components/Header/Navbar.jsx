@@ -13,6 +13,9 @@ const Navbar = () => {
       <NavLink to="/listedBooks" className="">
         Listed Books
       </NavLink>
+      <NavLink to="/pageToRead" className="">
+        Pages To Read
+      </NavLink>
       {/* <NavLink
         to="/"
         className={({ isActive }) =>
