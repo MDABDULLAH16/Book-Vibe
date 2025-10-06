@@ -1,6 +1,7 @@
 import React from "react";
 import banner from "/books-banner.png";
 import Container from "../Container/Container";
+import { Link } from "react-router";
 const Banner = () => {
   return (
     <div className="my-12">
@@ -11,9 +12,12 @@ const Banner = () => {
               <h1 className="lg:text-6xl text-3xl font-bold ">
                 Books to freshen up your bookshelf
               </h1>
-              <button className="btn bg-[#23BE0A] text-white font-work lg:mt-12 mt-4">
+              <Link
+                to="/listedBooks"
+                className="btn bg-[#23BE0A] text-white font-work lg:mt-12 mt-4"
+              >
                 Visit the List
-              </button>
+              </Link>
             </div>
             <img className="h-[394px]" src={banner} alt="Books" />
           </div>

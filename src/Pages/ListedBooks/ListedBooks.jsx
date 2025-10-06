@@ -10,6 +10,7 @@ import { getStoreBook } from "../../utilities/AddToDb";
 const ListedBooks = () => {
   const bookData = useLoaderData();
   //   console.log(bookData);
+  const [sort, setSort] = useState("");
   const [readListBook, setReadListBook] = useState([]);
 
   useEffect(() => {
@@ -20,6 +21,20 @@ const ListedBooks = () => {
     setReadListBook(filterBookData);
   }, []);
 
+  const handleSort = (type) => {
+    setSort(type);
+    if (type === "pages") {
+      const sortByPages = [...readListBook].sort(
+        (a, b) => a.totalPages - b.totalPages
+      );
+      setReadListBook(sortByPages);
+    } else if (type === "ratings") {
+      const sortByRatings = [...readListBook].sort(
+        (a, b) => a.rating - b.rating
+      );
+      setReadListBook(sortByRatings);
+    }
+  };
   return (
     <Container>
       <div className="my-9">
@@ -27,9 +42,19 @@ const ListedBooks = () => {
           <h1 className="text-3xl font-bold font-work py-8">Books</h1>
         </div>
         <div className="flex justify-center items-center mt-8 ">
-          <button className="flex text-white text-center items-center gap-2 btn bg-[#23BE0A]">
-            Sort By <BiDownArrowAlt />{" "}
-          </button>
+          <details className="dropdown  text-black">
+            <summary className="btn m-1 bg-[#23BE0A] text-white">
+              Sort by {sort ? sort : ""}
+            </summary>
+            <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+              <li>
+                <a onClick={() => handleSort("pages")}>pages</a>
+              </li>
+              <li>
+                <a onClick={() => handleSort("ratings")}>ratings</a>
+              </li>
+            </ul>
+          </details>{" "}
         </div>
         <div className="mt-6">
           <Tabs>
