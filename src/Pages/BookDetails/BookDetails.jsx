@@ -1,7 +1,8 @@
 import React from "react";
 import { useLoaderData } from "react-router";
 import Container from "./../../Components/Container/Container";
-import { AddBookToDb } from "../../utilities/AddToDb";
+import { AddBookToDb, getStoreBook } from "../../utilities/AddToDb";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
   const singleBook = useLoaderData();
@@ -26,7 +27,22 @@ const BookDetails = () => {
   }
 
   const handleMarkAsRead = (id) => {
-    AddBookToDb(id);
+    const storedBook = getStoreBook("readList");
+    if (storedBook.includes(id)) {
+      toast.error("This Book already added");
+      return;
+    }
+    AddBookToDb("readList", id);
+    toast.success("Your Book add Successfully");
+  };
+  const handleWishList = (id) => {
+    const storedBook = getStoreBook("wishList");
+    if (storedBook.includes(id)) {
+      toast.error("This Book already added");
+      return;
+    }
+    AddBookToDb("wishList", id);
+    toast.success("Your Book add Successfully");
   };
   return (
     <Container>
@@ -96,7 +112,10 @@ const BookDetails = () => {
             >
               Mark as Read
             </button>
-            <button className="btn bg-[#50B1C9] text-white ">
+            <button
+              onClick={() => handleWishList(bookId)}
+              className="btn bg-[#50B1C9] text-white "
+            >
               Add to Wish List
             </button>
           </div>
